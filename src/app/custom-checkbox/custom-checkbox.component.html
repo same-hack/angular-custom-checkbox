@@ -1,0 +1,13 @@
+<!-- ダイナミックにクラスを設定する
+     クリックされた時に toggle() メソッドを呼び出す -->
+<div [ngClass]="getColor()" (click)="toggle()">
+  <!-- チェックボックスの状態を value プロパティにバインド
+       無効状態を disabled プロパティにバインド -->
+  <input type="checkbox" [checked]="value" [disabled]="disabled" />
+
+  <!-- カスタムチェックボックスのスタイルを適用するための要素 -->
+  <span class="custom-checkbox"></span>
+
+  <!-- チェックボックスのラベル -->
+  <label>{{ label }}</label>
+</div>

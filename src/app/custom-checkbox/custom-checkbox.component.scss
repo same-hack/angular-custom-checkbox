@@ -1,0 +1,137 @@
+$colors: (
+  default: (
+    // 文字色（白）
+    label-color: #343a40,
+    // 未チェックの際の枠の色（黒）
+    un-checked-frame: #343a40,
+    // チェックボックス内の色（黒）
+    checkbox: #343a40,
+    // チェックドのマークの色（白）
+    checked-mark: #ffffff,
+    // チェックドの際の枠の色（黒）
+    checked-frame: #343a40,
+  ),
+  red: (
+    // 文字色
+    label-color: #dc3545,
+    // 未チェックの際の枠の色
+    un-checked-frame: #dc3545,
+    // チェックボックス内の色
+    checkbox: #dc3545,
+    // チェックドのマークの色
+    checked-mark: #721c24,
+    // チェックドの際の枠の色
+    checked-frame: #dc3545,
+  ),
+  blue: (
+    // 文字色
+    label-color: #007bff,
+    // 未チェックの際の枠の色
+    un-checked-frame: #007bff,
+    // チェックボックス内の色
+    checkbox: #007bff,
+    // チェックドのマークの色
+    checked-mark: #004085,
+    // チェックドの際の枠の色
+    checked-frame: #007bff,
+  ),
+  yellow: (
+    // 文字色
+    label-color: #ffc107,
+    // 未チェックの際の枠の色
+    un-checked-frame: #ffc107,
+    // チェックボックス内の色
+    checkbox: #ffc107,
+    // チェックドのマークの色
+    checked-mark: #856404,
+    // チェックドの際の枠の色
+    checked-frame: #ffc107,
+  ),
+  pink: (
+    // 文字色
+    label-color: #e83e8c,
+    // 未チェックの際の枠の色
+    un-checked-frame: #e83e8c,
+    // チェックボックス内の色
+    checkbox: #e83e8c,
+    // チェックドのマークの色
+    checked-mark: #6f0421,
+    // チェックドの際の枠の色
+    checked-frame: #e83e8c,
+  ),
+  green: (
+    // 文字色
+    label-color: #28a745,
+    // 未チェックの際の枠の色
+    un-checked-frame: #28a745,
+    // チェックボックス内の色
+    checkbox: #28a745,
+    // チェックドのマークの色
+    checked-mark: #155724,
+    // チェックドの際の枠の色
+    checked-frame: #28a745,
+  ),
+);
+
+@each $color-name, $color in $colors {
+  $label-color: map-get($color, label-color);
+  $un-checked-frame: map-get($color, un-checked-frame);
+  $checkbox: map-get($color, checkbox);
+  $checked-mark: map-get($color, checked-mark);
+  $checked-frame: map-get($color, checked-frame);
+
+  .custom-checkbox-#{$color-name} {
+    input[type="checkbox"] {
+      display: none; /* チェックボックスを非表示にする */
+    }
+
+    /* 自作のチェックボックスの装飾用 */
+    .custom-checkbox {
+      display: inline-block; /* インラインブロック要素として表示 */
+      width: 20px; /* 幅指定 */
+      height: 20px; /* 高さ指定 */
+      border: 2px solid $un-checked-frame; /* 枠線の赤 */
+      background-color: transparent; /* デフォルトの背景色 */
+      vertical-align: middle; /* 垂直方向の中央揃え */
+      line-height: 1; /* ラインハイトをリセット */
+      box-sizing: border-box; /* border-boxモデルを使用して要素のサイズを計算 */
+      margin-right: 5px; /* チェックボックスとテキストの間隔 */
+      top: -0.05em; /* 少し下にずれるので微調整 */
+      position: relative; /* 相対位置指定 */
+      border-radius: 2.5px; /* 丸み※20pxくらいにすると円になる */
+    }
+
+    /* チェックされたときの装飾 */
+    input[type="checkbox"]:checked + .custom-checkbox {
+      background: $checkbox;
+    }
+
+    /* チェックボックスのチェックマークのスタイル */
+    input[type="checkbox"]:checked + .custom-checkbox::after {
+      content: ""; /* コンテンツを追加 */
+      position: absolute; /* 絶対位置指定 */
+      top: 0%; /* 上端を中央に配置 */
+      left: 25%; /* 左端を中央に配置 */
+      width: 5px; /* 幅指定 */
+      height: 10px; /* 高さ指定 */
+      border: solid $checked-mark; /* チェックマークの色 */
+      border-width: 0 2px 2px 0; /* チェックマークの形状を指定 */
+      transform: rotate(45deg); /* チェックマークを回転させる */
+    }
+
+    /* テキストのスタイル */
+    label {
+      color: $label-color; /* テキストの色を指定 */
+    } /* チェックボックスがdisabledの場合のスタイル */
+    input[type="checkbox"]:disabled + .custom-checkbox {
+      pointer-events: none; /* マウスイベントを無効化してクリックを無効にする */
+      border-color: darkgray;
+    } /* チェックボックスがdisabledの場合のテキストのスタイル */
+    input[type="checkbox"]:disabled + .custom-checkbox + label {
+      color: darkgray; /* テキストの色をダークグレーにする */
+    } /* チェックボックスがdisabledでかつチェックされた場合のスタイル */
+    input[type="checkbox"]:disabled:checked + .custom-checkbox {
+      background-color: darkgray; /* チェックされていてdisabledの場合の背景色を指定 */
+    }
+  }
+}
