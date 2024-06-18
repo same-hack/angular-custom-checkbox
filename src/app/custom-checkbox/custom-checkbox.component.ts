@@ -1,4 +1,10 @@
-import { Component, Input, forwardRef } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  forwardRef,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -17,10 +23,12 @@ export class CustomCheckboxComponent implements ControlValueAccessor {
   @Input() label: string = ''; // 外部からラベルを受け取るためのInputプロパティ
   @Input() disabled: boolean = false; // 外部からdisabled状態を受け取るためのInputプロパティ
   @Input() color: string = 'default'; // 外部から色情報を受け取るためのInputプロパティ
+  @Output() valueChange = new EventEmitter<boolean>(); // 変更を親に渡す
   value: boolean = false; // チェックボックスの内部状態
 
   PLEFIX = 'custom-checkbox-';
 
+  // クラス名の取得
   getColor() {
     return this.PLEFIX + this.color;
   }
@@ -55,6 +63,7 @@ export class CustomCheckboxComponent implements ControlValueAccessor {
       this.value = !this.value;
       this.onChange(this.value); // 新しい値をフォームコントロールに伝える
       this.onTouched(); // タッチイベントをフォームコントロールに伝える
+      this.valueChange.emit(this.value); // 親に値を渡す
     }
   }
 }

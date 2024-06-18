@@ -16,11 +16,9 @@ export class AppComponent {
     { id: 4, userName: 'ぶたハック', isChecked: false },
   ];
 
-  // チェックボックスの状態を変更するメソッド
-  onCheckboxChange(id: number, isChecked: boolean) {
-    const form = this.forms.find((f) => f.id === id);
-    if (form) {
-      form.isChecked = isChecked;
-    }
+  // チェックボックス変更を検知するメソッド
+  onCheckboxChange(isChecked: boolean, id: number) {
+    console.log('id', id);
+    console.log('isChecked', isChecked);
   }
 }
