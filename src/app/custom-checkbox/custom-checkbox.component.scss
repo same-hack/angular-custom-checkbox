@@ -103,7 +103,8 @@ $colors: (
 
     /* チェックされたときの装飾 */
     input[type="checkbox"]:checked + .custom-checkbox {
-      background: $checkbox;
+      background: $checkbox; /* チェックボックスの色 */
+      border-color: $checked-frame; /* 枠の色 */
     }
 
     /* チェックボックスのチェックマークのスタイル */
